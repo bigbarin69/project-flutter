@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/login.dart';
 import 'package:app/register.dart';
+import 'package:app/dashboard.dart';
 
 void main() => runApp(const MaterialApp(
       home: MyApp(),
@@ -46,6 +47,17 @@ class _MyAppState extends State<MyApp> {
                   },
                   child: const Text(
                     'Register',
+                    style: TextStyle(color: Colors.white),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Dashboard()));
+                  },
+                  child: const Text(
+                    'Dashboard',
                     style: TextStyle(color: Colors.white),
                   ))
             ],

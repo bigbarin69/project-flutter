@@ -1,13 +1,20 @@
 import 'dart:convert';
+import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:app/register.dart';
+//import 'package:app/register.dart';
 import 'package:app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const MaterialApp(
       home: MyLogin(),
       debugShowCheckedModeBanner: false,
     ));
+
+void savedusername(String username) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString('username', username);
+}
 
 Future<Login> createlogin(String username, String password) async {
   var map = <String, dynamic>{};
@@ -19,6 +26,7 @@ Future<Login> createlogin(String username, String password) async {
     body: map,
   );
   if (response.statusCode == 200) {
+    savedusername(username);
     return Login.fromJson(jsonDecode(response.body));
   } else {
     throw Exception('Failed to create album.');
@@ -112,9 +120,9 @@ class _MyLogin extends State<MyLogin> {
     return FutureBuilder<Login>(
       future: futureLogin,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.isDefinedAndNotNull) {
           return Text(
-            '${snapshot.data!.username} logged in!',
+            '${myUsername.text} logged in!',
             style: const TextStyle(fontSize: 20),
           );
         } else if (snapshot.hasError) {
