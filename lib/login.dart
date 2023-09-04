@@ -59,31 +59,50 @@ class _MyLogin extends State<MyLogin> {
   final myPassword = TextEditingController();
   Future<Login>? futureLogin;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   futureLogin = createlogin();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Interbold',
+        scaffoldBackgroundColor: const Color.fromARGB(175, 104, 208, 189),
+      ),
       title: 'Login Page',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
+            backgroundColor: const Color.fromARGB(178, 70, 164, 196),
+            titleSpacing: 20.0,
+            toolbarHeight: 70.0,
             centerTitle: true,
-            title: const Text('Login Page'),
-            leading: TextButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MyApp()));
-              },
-              child: const Text(
-                'Home',
-                style: TextStyle(color: Colors.white),
-              ),
+            title: const Text(
+              'Login Page',
+              style: TextStyle(fontSize: 25.0),
             ),
+            leading: Row(
+              children: <Widget>[
+                const SizedBox(width: 20.0),
+                Container(
+                  padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(5.0))),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyApp()));
+                    },
+                    child: const Text(
+                      'Home',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            leadingWidth: 100.0,
           ),
           body: Container(
             alignment: Alignment.center,
@@ -93,26 +112,42 @@ class _MyLogin extends State<MyLogin> {
     );
   }
 
-  Column buildColumn() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        TextField(
-          controller: myUsername,
-          decoration: const InputDecoration(hintText: 'Username'),
-        ),
-        TextField(
-          controller: myPassword,
-          decoration: const InputDecoration(hintText: 'Password'),
-        ),
-        ElevatedButton(
-            onPressed: () {
-              setState(() {
-                futureLogin = createlogin(myUsername.text, myPassword.text);
-              });
-            },
-            child: const Text('Check Data'))
-      ],
+  Container buildColumn() {
+    return Container(
+      height: 400.0,
+      width: 380.0,
+      padding: const EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.blueGrey, width: 3.0),
+          borderRadius: const BorderRadius.all(Radius.circular(15.0))),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          TextField(
+            controller: myUsername,
+            decoration: const InputDecoration(hintText: 'Username'),
+          ),
+          TextField(
+            controller: myPassword,
+            decoration: const InputDecoration(hintText: 'Password'),
+          ),
+          const SizedBox(
+            height: 30.0,
+          ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 10, 187, 161)),
+              onPressed: () {
+                setState(() {
+                  futureLogin = createlogin(myUsername.text, myPassword.text);
+                });
+              },
+              child: const Text(
+                'Log In',
+                style: TextStyle(),
+              ))
+        ],
+      ),
     );
   }
 
