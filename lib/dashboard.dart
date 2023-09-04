@@ -72,35 +72,72 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Interbold',
+        scaffoldBackgroundColor: const Color.fromARGB(175, 104, 208, 189),
+      ),
       title: 'Dashboard',
       home: Scaffold(
           appBar: AppBar(
+            backgroundColor: const Color.fromARGB(178, 70, 164, 196),
             centerTitle: true,
-            title: const Text('Dashboard'),
-            leading: TextButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MyApp()));
-              },
-              child: const Text(
-                'Home',
-                style: TextStyle(color: Colors.white),
-              ),
+            title: const Text(
+              'Dashboard',
+              style: TextStyle(fontSize: 25.0),
             ),
+            titleSpacing: 20.0,
+            toolbarHeight: 70.0,
+            leading: Row(
+              children: <Widget>[
+                const SizedBox(width: 20.0),
+                Container(
+                  padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(5.0))),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyApp()));
+                    },
+                    child: const Text(
+                      'Home',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            leadingWidth: 100.0,
             actions: <Widget>[
               Row(
                 children: <Widget>[
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Dashboardentry()));
-                      },
-                      child: const Text(
-                        'Add Books',
-                        style: TextStyle(color: Colors.white),
-                      ))
+                  Container(
+                    padding: const EdgeInsets.all(3.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5.0))),
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const Dashboardentry()));
+                        },
+                        child: const Text(
+                          'Add Books',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ),
+                  const SizedBox(
+                    width: 20.0,
+                  )
                 ],
               )
             ],
@@ -121,15 +158,25 @@ class _DashboardState extends State<Dashboard> {
           return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                return Card(
-                  margin: const EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
+                return Container(
+                  padding: const EdgeInsets.fromLTRB(30.0, 15.0, 30.0, 15.0),
                   child: ListTile(
-                    tileColor: Colors.grey,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    title: Text(snapshot.data![index].bookname),
+                    contentPadding:
+                        const EdgeInsets.fromLTRB(17.0, 5.0, 17.0, 5.0),
+                    tileColor: const Color.fromRGBO(107, 148, 168, 1),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    title: Text(
+                      snapshot.data![index].bookname,
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 20.0),
+                    ),
                     subtitle: Text('Rating : ${snapshot.data![index].rating}'),
-                    trailing: Text(snapshot.data![index].status),
+                    trailing: Text(
+                      snapshot.data![index].status,
+                      style: const TextStyle(fontSize: 17.0),
+                    ),
                   ),
                 );
               });
@@ -193,21 +240,43 @@ class _DashboardentryState extends State<Dashboardentry> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Add Books',
+      theme: ThemeData(
+        fontFamily: 'Interbold',
+        scaffoldBackgroundColor: const Color.fromARGB(175, 104, 208, 189),
+      ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
             title: const Text('Add Books'),
             centerTitle: true,
-            leading: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Dashboard()));
-                },
-                child: const Text(
-                  'Back',
-                  style: TextStyle(color: Colors.white),
-                )),
+            backgroundColor: const Color.fromARGB(178, 70, 164, 196),
+            titleSpacing: 20.0,
+            toolbarHeight: 70.0,
+            leading: Row(
+              children: <Widget>[
+                const SizedBox(width: 20.0),
+                Container(
+                  padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(5.0))),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Dashboard()));
+                    },
+                    child: const Text(
+                      'Dashboard',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            leadingWidth: 150.0,
           ),
           body: Container(
             alignment: Alignment.center,
@@ -220,10 +289,32 @@ class _DashboardentryState extends State<Dashboardentry> {
   Column addingbooks() {
     return Column(
       children: <Widget>[
+        const SizedBox(
+          height: 30.0,
+        ),
+        const Text(
+          'Add your favourite books',
+          style: TextStyle(
+            fontSize: 30.0,
+            color: Color.fromRGBO(57, 86, 101, 1),
+          ),
+        ),
+        const SizedBox(
+          height: 45.0,
+        ),
+        Container(
+          padding: const EdgeInsets.only(left: 11.0),
+          alignment: Alignment.centerLeft,
+          child: const Text(
+            'Bookname',
+            style: TextStyle(
+                fontSize: 22.0, color: Color.fromARGB(255, 106, 104, 104)),
+          ),
+        ),
         Container(
           padding: const EdgeInsets.all(15.0),
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
+              border: Border.all(color: Colors.black, width: 2.0),
               borderRadius: const BorderRadius.all(Radius.circular(5.0))),
           child: TextField(
             controller: myBookname,
@@ -235,9 +326,18 @@ class _DashboardentryState extends State<Dashboardentry> {
           height: 25.0,
         ),
         Container(
+          padding: const EdgeInsets.only(left: 11.0),
+          alignment: Alignment.centerLeft,
+          child: const Text(
+            'Rating',
+            style: TextStyle(
+                fontSize: 22.0, color: Color.fromARGB(255, 106, 104, 104)),
+          ),
+        ),
+        Container(
           padding: const EdgeInsets.all(15.0),
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
+              border: Border.all(color: Colors.black, width: 2.0),
               borderRadius: const BorderRadius.all(Radius.circular(5.0))),
           child: TextField(
             controller: myRating,
@@ -248,9 +348,18 @@ class _DashboardentryState extends State<Dashboardentry> {
           height: 25.0,
         ),
         Container(
+          padding: const EdgeInsets.only(left: 11.0),
+          alignment: Alignment.centerLeft,
+          child: const Text(
+            'Status',
+            style: TextStyle(
+                fontSize: 22.0, color: Color.fromARGB(255, 106, 104, 104)),
+          ),
+        ),
+        Container(
             padding: const EdgeInsets.all(15.0),
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
+                border: Border.all(color: Colors.black, width: 2.0),
                 borderRadius: const BorderRadius.all(Radius.circular(5.0))),
             child: DropdownButton<String>(
                 isExpanded: true,
@@ -271,13 +380,15 @@ class _DashboardentryState extends State<Dashboardentry> {
           height: 25.0,
         ),
         ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 10, 187, 161)),
             onPressed: () {
               setState(() {
                 newentry =
                     sendbooks(myBookname.text, myRating.text, selectedstatus!);
               });
             },
-            child: const Text('Submit Book')),
+            child: const Text('Add Book')),
       ],
     );
   }
