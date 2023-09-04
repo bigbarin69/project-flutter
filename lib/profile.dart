@@ -1,11 +1,12 @@
 import 'dart:convert';
-
+import 'package:app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 void main() => runApp(const MaterialApp(
       home: Profile(),
+      debugShowCheckedModeBanner: false,
     ));
 
 Future<String?> getsavedusername() async {
@@ -70,36 +71,49 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Profile Page',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Interbold',
+        scaffoldBackgroundColor: const Color.fromARGB(175, 104, 208, 189),
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Profile Page'),
+          backgroundColor: const Color.fromARGB(178, 70, 164, 196),
+          titleSpacing: 20.0,
+          toolbarHeight: 70.0,
           centerTitle: true,
+          leading: Row(
+            children: <Widget>[
+              const SizedBox(width: 20.0),
+              Container(
+                padding: const EdgeInsets.all(3.0),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    borderRadius: const BorderRadius.all(Radius.circular(5.0))),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const MyApp()));
+                  },
+                  child: const Text(
+                    'Home',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          leadingWidth: 100.0,
         ),
         body: Padding(
-            padding: const EdgeInsets.all(40.0),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  child: profilebuilder(),
-                ),
-                const SizedBox(
-                  width: 250.0,
-                ),
-                const Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 65.0,
-                    ),
-                    Image(
-                      image: AssetImage('assets/profile.png'),
-                      height: 300,
-                      width: 300,
-                    ),
-                  ],
-                ),
-              ],
-            )),
+          padding: const EdgeInsets.all(40.0),
+          child: Container(
+            padding: const EdgeInsets.only(top: 40.0),
+            alignment: Alignment.center,
+            child: profilebuilder(),
+          ),
+        ),
       ),
     );
   }
@@ -114,7 +128,10 @@ class _ProfileState extends State<Profile> {
               children: <Widget>[
                 const Text(
                   'Full Name',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 78, 77, 77)),
                 ),
                 Container(
                   width: 750.0,
@@ -133,7 +150,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 const Text(
                   'Username',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 78, 77, 77)),
                 ),
                 Container(
                   width: 750.0,
@@ -152,7 +172,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 const Text(
                   'Password',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 78, 77, 77)),
                 ),
                 Container(
                   width: 750.0,
@@ -171,7 +194,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 const Text(
                   'Email',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 78, 77, 77)),
                 ),
                 Container(
                   width: 750.0,
@@ -190,7 +216,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 const Text(
                   'Phone Number',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 78, 77, 77)),
                 ),
                 Container(
                   width: 750.0,
@@ -207,9 +236,9 @@ class _ProfileState extends State<Profile> {
               ],
             );
           } else if (snapshot.hasError) {
-            return Text(
-              '${snapshot.error}',
-              style: const TextStyle(
+            return const Text(
+              'Please Log in!',
+              style: TextStyle(
                 fontSize: 30.0,
               ),
             );
