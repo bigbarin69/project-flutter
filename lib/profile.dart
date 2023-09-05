@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:app/main.dart';
+import 'package:akashic/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -70,7 +70,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Profile Page',
+      title: 'Profile',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Interbold',
@@ -78,7 +78,10 @@ class _ProfileState extends State<Profile> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Profile Page'),
+          title: const Text(
+            'Profile',
+            style: TextStyle(fontSize: 25.0),
+          ),
           backgroundColor: const Color.fromARGB(178, 70, 164, 196),
           titleSpacing: 20.0,
           toolbarHeight: 70.0,
@@ -94,7 +97,7 @@ class _ProfileState extends State<Profile> {
                 child: TextButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const MyApp()));
+                        MaterialPageRoute(builder: (context) => MyApp()));
                   },
                   child: const Text(
                     'Home',

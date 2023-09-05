@@ -3,7 +3,7 @@ import 'dart:async';
 import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:app/main.dart';
+import 'package:akashic/main.dart';
 import 'package:http/http.dart' as http;
 
 void main() => runApp(const MaterialApp(
@@ -99,10 +99,8 @@ class _DashboardState extends State<Dashboard> {
                           const BorderRadius.all(Radius.circular(5.0))),
                   child: TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MyApp()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MyApp()));
                     },
                     child: const Text(
                       'Home',
@@ -193,6 +191,8 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 }
+
+// ########################################################################################################################
 
 Future<Books> sendbooks(String bookname, String rating, String status) async {
   var map = <String?, dynamic>{};
@@ -400,10 +400,13 @@ class _DashboardentryState extends State<Dashboardentry> {
         if (snapshot.isDefinedAndNotNull) {
           return const Text(
             'Book Entered!',
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 30),
           );
         } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
+          return const Text(
+            'Please Log in!',
+            style: TextStyle(fontSize: 30.0),
+          );
         }
 
         return const CircularProgressIndicator();

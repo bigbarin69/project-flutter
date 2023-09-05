@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 //import 'package:app/register.dart';
-import 'package:app/main.dart';
+import 'package:akashic/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const MaterialApp(
@@ -29,20 +28,18 @@ Future<Login> createlogin(String username, String password) async {
     savedusername(username);
     return Login.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Failed to create album.');
+    throw Exception('Failed to Log in!');
   }
 }
 
 class Login {
   final String username;
-  final String password;
 
-  const Login({required this.username, required this.password});
+  const Login({required this.username});
 
   factory Login.fromJson(Map<String, dynamic> json) {
     return Login(
       username: json['username'],
-      password: json['password'],
     );
   }
 }
@@ -66,7 +63,7 @@ class _MyLogin extends State<MyLogin> {
         fontFamily: 'Interbold',
         scaffoldBackgroundColor: const Color.fromARGB(175, 104, 208, 189),
       ),
-      title: 'Login Page',
+      title: 'Login',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
@@ -75,7 +72,7 @@ class _MyLogin extends State<MyLogin> {
             toolbarHeight: 70.0,
             centerTitle: true,
             title: const Text(
-              'Login Page',
+              'Login',
               style: TextStyle(fontSize: 25.0),
             ),
             leading: Row(
@@ -89,10 +86,8 @@ class _MyLogin extends State<MyLogin> {
                           const BorderRadius.all(Radius.circular(5.0))),
                   child: TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MyApp()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MyApp()));
                     },
                     child: const Text(
                       'Home',
@@ -104,18 +99,36 @@ class _MyLogin extends State<MyLogin> {
             ),
             leadingWidth: 100.0,
           ),
-          body: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(8),
-            child: (futureLogin == null) ? buildColumn() : buildFutureBuilder(),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(
+                height: 60.0,
+              ),
+              const Text(
+                'Log into Akashic!',
+                style: TextStyle(
+                    fontSize: 40.0, color: Color.fromARGB(255, 62, 82, 93)),
+              ),
+              const SizedBox(
+                height: 60.0,
+              ),
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(8),
+                child: (futureLogin == null)
+                    ? buildColumn()
+                    : buildFutureBuilder(),
+              ),
+            ],
           )),
     );
   }
 
   Container buildColumn() {
     return Container(
-      height: 400.0,
-      width: 380.0,
+      height: 430.0,
+      width: 400.0,
       padding: const EdgeInsets.all(15.0),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.blueGrey, width: 3.0),
@@ -155,10 +168,14 @@ class _MyLogin extends State<MyLogin> {
     return FutureBuilder<Login>(
       future: futureLogin,
       builder: (context, snapshot) {
-        if (snapshot.isDefinedAndNotNull) {
-          return Text(
-            '${myUsername.text} logged in!',
-            style: const TextStyle(fontSize: 20),
+        if (snapshot.hasData) {
+          return Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(top: 100.0),
+            child: Text(
+              '${snapshot.data?.username} logged in!',
+              style: const TextStyle(fontSize: 30),
+            ),
           );
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
