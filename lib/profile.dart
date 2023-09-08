@@ -22,7 +22,7 @@ Future<Userprofile> userdetails() async {
   map['username'] = savedusername;
 
   http.Response response = await http.post(
-    Uri.parse('http://127.0.0.1:8000/profile'),
+    Uri.parse('http://65.2.176.250/profile'),
     body: map,
   );
 

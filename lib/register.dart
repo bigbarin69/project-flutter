@@ -24,7 +24,7 @@ Future<Register> createregister(String login, String pass, String fullname,
   map['phone'] = phoneno;
 
   http.Response response = await http.post(
-    Uri.parse('http://127.0.0.1:8000/register'),
+    Uri.parse('http://65.2.176.250/register'),
     body: map,
   );
   if (response.statusCode == 200) {

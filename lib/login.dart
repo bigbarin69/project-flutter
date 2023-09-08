@@ -21,7 +21,7 @@ Future<Login> createlogin(String username, String password) async {
   map['password'] = password;
 
   http.Response response = await http.post(
-    Uri.parse('http://127.0.0.1:8000/login'),
+    Uri.parse('http://65.2.176.250/login'),
     body: map,
   );
   if (response.statusCode == 200) {
