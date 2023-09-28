@@ -24,7 +24,7 @@ Future<Register> createregister(String login, String pass, String fullname,
   map['phone'] = phoneno;
 
   http.Response response = await http.post(
-    Uri.parse('http://65.2.176.250/register'),
+    Uri.parse('https://akashic-api.prathikp.tech/register'),
     body: map,
   );
   if (response.statusCode == 200) {
@@ -118,12 +118,17 @@ class _MyRegisterState extends State<MyRegister> {
                 const SizedBox(
                   height: 60.0,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  child: (futureregister == null)
-                      ? registercont()
-                      : registerreturn(),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: (futureregister == null)
+                        ? registercont()
+                        : registerreturn(),
+                  ),
                 ),
+                const SizedBox(
+                  height: 30.0,
+                )
               ]),
             )));
   }

@@ -24,7 +24,7 @@ Future<List<Books>> getbooks() async {
   map['username'] = savedusername;
 
   http.Response response = await http.post(
-    Uri.parse('http://65.2.176.250/get-books'),
+    Uri.parse('https://akashic-api.prathikp.tech/get-books'),
     body: map,
   );
   if (response.statusCode == 200) {
@@ -204,7 +204,7 @@ Future<Books> sendbooks(String bookname, String rating, String status) async {
   map['status'] = status;
 
   http.Response response = await http.post(
-    Uri.parse('http://127.0.0.1:8000/add-books'),
+    Uri.parse('https://akashic-api.prathikp.tech/add-books'),
     body: map,
   );
 

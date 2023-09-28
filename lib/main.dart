@@ -29,6 +29,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenPixelratio = MediaQuery.of(context).size.height;
+
     return MaterialApp(
       title: 'Akashic',
       theme: ThemeData(
@@ -50,7 +54,7 @@ class MyApp extends StatelessWidget {
                   title: const Text(
                     'Akashic',
                     style: TextStyle(
-                      fontSize: 40.0,
+                      fontSize: 40,
                       fontFamily: 'Lily',
                       letterSpacing: 1.5,
                     ),
@@ -148,35 +152,46 @@ class MyApp extends StatelessWidget {
                     )
                   ],
                 ),
-                body: Row(
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          padding:
-                              const EdgeInsets.fromLTRB(55.0, 20.0, 0, 10.0),
-                          child: const Text(
-                            'Welcome!',
-                            style: TextStyle(fontSize: 40.0),
-                          ),
-                        ),
-                        Container(
-                          padding:
-                              const EdgeInsets.fromLTRB(55.0, 20.0, 0, 10.0),
-                          child: const Text(
-                            'Akashic is a free to use database app that you\ncan use to keep track of any and all books\nyouve read.Over 200,000 books and written material\nall in one location. Sign up today to get access\nto a mega-library at the cost of free!\n',
-                            style: TextStyle(fontSize: 20.0),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                body: homeBody(),
               );
             }
           }),
+    );
+  }
+
+  Row homeBody() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.only(left: 50.0),
+            alignment: Alignment.center,
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Welcome!',
+                  style: TextStyle(fontSize: 40.0),
+                ),
+                SizedBox(
+                  height: 25.0,
+                ),
+                Text(
+                  'Akashic is a free to use database app that you can use to keep track of any and all books youve read. Over 200,000 books and written material all in one location. Sign up today to get access to a mega-library at the cost of free! ',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Expanded(
+          child: Image(
+            image: AssetImage('assets/akashic-book.png'),
+          ),
+        )
+      ],
     );
   }
 }

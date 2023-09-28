@@ -21,7 +21,7 @@ Future<Login> createlogin(String username, String password) async {
   map['password'] = password;
 
   http.Response response = await http.post(
-    Uri.parse('http://65.2.176.250/login'),
+    Uri.parse('https://akashic-api.prathikp.tech/login'),
     body: map,
   );
   if (response.statusCode == 200) {
@@ -113,13 +113,18 @@ class _MyLogin extends State<MyLogin> {
               const SizedBox(
                 height: 60.0,
               ),
-              Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(8),
-                child: (futureLogin == null)
-                    ? buildColumn()
-                    : buildFutureBuilder(),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(8),
+                  child: (futureLogin == null)
+                      ? buildColumn()
+                      : buildFutureBuilder(),
+                ),
               ),
+              const SizedBox(
+                height: 30.0,
+              )
             ],
           )),
     );

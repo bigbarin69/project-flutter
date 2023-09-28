@@ -22,7 +22,7 @@ Future<Userprofile> userdetails() async {
   map['username'] = savedusername;
 
   http.Response response = await http.post(
-    Uri.parse('http://65.2.176.250/profile'),
+    Uri.parse('https://akashic-api.prathikp.tech/profile'),
     body: map,
   );
 
